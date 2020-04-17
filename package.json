@@ -1,0 +1,38 @@
+{
+	"name": "jamming",
+	"version": "0.1.0",
+	"description": "Library to handle low latency audio conferencing.",
+	"main": "lib/index.js",
+	"private": true,
+	"scripts": {
+		"build": "yarn run build:lib && yarn run build:webpack",
+		"build:lib": "babel src/ -d lib/",
+		"build:webpack": "webpack lib/index.js -o dist/jamming.js",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "John-Mark Gurney <jmg@funkthat.com>",
+	"license": "BSD-3-Clause",
+	"browserslist": "> 0.25%, not dead",
+	"babel": {
+		"presets": [
+			"@babel/preset-env"
+		],
+		"plugins": [
+			[
+				"@babel/plugin-proposal-class-properties"
+			]
+		]
+	},
+	"devDependencies": {
+		"@babel/cli": "^7.8.4",
+		"@babel/core": "^7.9.0",
+		"@babel/plugin-proposal-class-properties": "^7.8.3",
+		"@babel/preset-env": "^7.9.5",
+		"babelify": "^10.0.0",
+		"webpack": "^4.42.1",
+		"webpack-cli": "^3.3.11"
+	},
+	"dependencies": {
+		"inline-worker": "https://github.com/mohayonao/inline-worker.git#7014cd64c3cd6eb884f6743aad682a995e262bb9"
+	}
+}
