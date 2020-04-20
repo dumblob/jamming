@@ -1,6 +1,5 @@
 'use strict'
 
-/* import {Jamming} from '../index' */
 const Jamming = require('../index')
 const expect = require('chai').expect
 
