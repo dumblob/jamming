@@ -8,11 +8,11 @@
 		"build": "yarn run build:lib && yarn run build:webpack",
 		"build:lib": "babel src/ -d lib/",
 		"build:webpack": "webpack lib/index.js -o dist/jamming.js",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "yarn run build:lib && nyc mocha lib/**/**.spec.js"
 	},
 	"author": "John-Mark Gurney <jmg@funkthat.com>",
 	"license": "BSD-3-Clause",
-	"browserslist": "> 0.25%, not dead",
+	"browserslist": "last 2 years",
 	"babel": {
 		"presets": [
 			"@babel/preset-env"
@@ -20,7 +20,8 @@
 		"plugins": [
 			[
 				"@babel/plugin-proposal-class-properties"
-			]
+			],
+			"istanbul"
 		]
 	},
 	"devDependencies": {
@@ -28,7 +29,12 @@
 		"@babel/core": "^7.9.0",
 		"@babel/plugin-proposal-class-properties": "^7.8.3",
 		"@babel/preset-env": "^7.9.5",
+		"@istanbuljs/nyc-config-babel": "^3.0.0",
+		"babel-plugin-istanbul": "^6.0.0",
 		"babelify": "^10.0.0",
+		"chai": "^4.2.0",
+		"mocha": "^7.1.1",
+		"nyc": "^15.0.1",
 		"webpack": "^4.42.1",
 		"webpack-cli": "^3.3.11"
 	},
