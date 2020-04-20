@@ -11,7 +11,7 @@
 		"test": "yarn run build:lib && nyc mocha lib/**/**.spec.js"
 	},
 	"author": "John-Mark Gurney <jmg@funkthat.com>",
-	"license": "BSD-3-Clause",
+	"license": "BSD-2-Clause",
 	"browserslist": "last 2 years",
 	"babel": {
 		"presets": [
