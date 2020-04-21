@@ -6,8 +6,8 @@
 	"private": true,
 	"scripts": {
 		"build": "yarn run build:lib && yarn run build:webpack",
-		"build:lib": "babel src/ -d lib/",
-		"build:webpack": "webpack lib/index.js -o dist/jamming.js",
+		"build:lib": "rm -rf lib && babel src/ -d lib/",
+		"build:webpack": "webpack --mode='development' lib/index.js -o dist/jamming.js",
 		"test": "yarn run build:lib && nyc mocha lib/**/**.spec.js"
 	},
 	"author": "John-Mark Gurney <jmg@funkthat.com>",

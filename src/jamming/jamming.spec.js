@@ -1,6 +1,6 @@
 'use strict'
 
-const Jamming = require('../index')
+const Jamming = require('../jamming').Jamming
 const expect = require('chai').expect
 
 describe('Jamming class', () => {
