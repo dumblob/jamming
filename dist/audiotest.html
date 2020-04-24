@@ -11,11 +11,14 @@
 </head>
 
 <body>
-<p></p>
+<p>
+<div id="constatus">undefined</div>
+<audio id="audioSink" autoplay></audio>
+</p>
 <script type="text/javascript" src="jamming.js"></script>
 <script type="text/javascript">
 
-runPage()
+//runPage()
 
 /* parameters */
 var params = {
@@ -25,7 +28,7 @@ var params = {
 
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
-var audioContext = new AudioContext();
+//var audioContext = new AudioContext();
 
 recconf = {
 	samplerRate: 8000,
