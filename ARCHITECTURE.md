@@ -16,6 +16,10 @@ Participant flow:
 		c) Output audio
 	3) Pass the setup items to do encoding/decoding and playback.
 
+Server meeting flow:
+	1) receive RTC request
+	2) start up RTC and add audio source to channel
+	3) mix in audio to channel and send it back to each participant
 
 File information:
 	src/index.js -- main file for web page
