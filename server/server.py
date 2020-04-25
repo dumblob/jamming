@@ -6,7 +6,7 @@ import uuid
 
 from aiohttp import web
 from aiortc import RTCPeerConnection, RTCIceCandidate, RTCSessionDescription
-from aiortc.contrib.media import MediaPlayer
+from aiortc.contrib.media import MediaPlayer, MediaBlackhole
 
 logger = logging.getLogger('pc')
 logger.setLevel(logging.INFO)
@@ -109,6 +109,7 @@ async def ws_handler(request):
 
 				if track.kind == "audio":
 					pc.addTrack(mixer.audio)
+					MediaBlackhole().addTrack(track)
 					#mixer.addTrack(track)
 
 				@track.on("ended")

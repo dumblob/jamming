@@ -2,6 +2,23 @@ import jamming from './jamming';
 import { v4 as uuidv4 } from 'uuid';
 import WebSocketAsPromised from 'websocket-as-promised';
 
+/* Deal with MediaStream not having a stop anymore */
+/* from: https://stackoverflow.com/a/11646945 */
+var MediaStream = window.MediaStream;
+
+if (typeof MediaStream === 'undefined' && typeof webkitMediaStream !== 'undefined') {
+    MediaStream = webkitMediaStream;
+}
+
+/*global MediaStream:true */
+if (typeof MediaStream !== 'undefined' && !('stop' in MediaStream.prototype)) {
+    MediaStream.prototype.stop = function() {
+        this.getTracks().forEach(function(track) {
+            track.stop();
+        });
+    };
+}
+
 function sendServer(obj) {
 	let lclobj = Object.assign({}, obj);
 	lclobj.uuid = uuid;
@@ -62,6 +79,7 @@ async function runPage() {
 		}
 	});
 	await wsp.open();
+	constatus.textContent = 'connection to server opened';
 
 	function sendServer(obj) {
 		var lclobj = Object.assign({}, obj);
@@ -95,6 +113,7 @@ async function runPage() {
 	};
 	pc.ontrack = (event) => {
 		audioSink.srcObject = event.streams[0];
+		constatus.textContent = 'playing audio';
 	};
 	pc.addStream(stream);
 
@@ -111,6 +130,23 @@ async function runPage() {
 
 	var ld = pc.localDescription;
 	sendServer({ sdp: ld.sdp, type: ld.type });
+
+	async function stopEverything() {
+		constatus.textContent = 'a';
+		stream.stop();
+		constatus.textContent = 'b';
+		var v = wsp.close();
+		constatus.textContent = 'c';
+		pc.close();
+		constatus.textContent = 'd';
+		await v;
+		constatus.textContent = 'Stopped';
+	};
+
+	global.stopPage = () => {
+		constatus.textContent = 'pa';
+		stopEverything();
+	}
 }
 runPage()
 
